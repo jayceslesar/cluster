@@ -2,10 +2,10 @@
 
 
 # My Setup
-4 Raspberry Pi 4 Model B 4GB running 64-bit Ubuntu 20.04 (worker nodes)
-1 Raspberry Pi 4 Model B 2GB running 64-bit Ubuntu 20.04 (head node)
-1 2-TB HDD plugged into head node
-5 port network switch
+- 4 Raspberry Pi 4 Model B 4GB running 64-bit Ubuntu 20.04 (worker nodes)
+- 1 Raspberry Pi 4 Model B 2GB running 64-bit Ubuntu 20.04 (head node)
+- 1 2-TB HDD plugged into head node
+- 5 port network switch
 # Setup
 - May need to give your vscode/terminal/whatever certain file access on Mac
 
