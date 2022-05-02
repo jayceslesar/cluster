@@ -12,7 +12,7 @@
 ## Flash and connect
 For each Pi:
 1. Flash 64-but Ubuntu Server 20.04 onto SD card
-2. 2 run `ansible-playbook playbooks/setup-flashed-sd-card.yml -i inventory --limit HOST --ask-vault-pass ` where host is defined in your inventory file
+2. `ansible-playbook playbooks/setup-flashed-sd-card.yml -i inventory --limit HOST --ask-vault-pass ` where host is defined in your inventory file
 3. Put SD card into your Pi and boot
 4. `ssh ubuntu@static-ip` and change the password on login and disconnect
 5. `ssh-copy-id -i ~/.ssh/id_ed25519.pub ubuntu@static-ip` (now you can run playbooks against that host)
