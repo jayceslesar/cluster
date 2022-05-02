@@ -1,0 +1,22 @@
+pis:
+  hosts:
+      numbah1:
+        hostname: numbah1
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.200
+      numbah2:
+        hostname: numbah2
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.201
+      numbah3:
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.202
+        hostname: numbah3
+      numbah4:
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.203
+        hostname: numbah4
+      numbah5:
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.204
+        hostname: numbah5
