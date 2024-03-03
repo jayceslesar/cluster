@@ -17,7 +17,6 @@
           hostname: {{ ansible_host }}
           manage_etc_hosts: true
 
-
           write_files:
           - path: /etc/cloud/cloud.cfg.d/99-custom-networking.cfg
             permissions: '0644'
@@ -32,11 +31,11 @@
                 wifis:
                   wlan0:
                     access-points:
-                      NetworkName:
-                        password: "NetworkPassword"
+                      "{{ hostname }}":
+                        password: "{{ password }}""
                     dhcp4: no
                     addresses:
-                      - {{ static_ip }}/24
+                      - "{{ ansible_host }}/24"
                     gateway4: 10.0.0.1
                     nameservers:
                         addresses: [75.75.75.75]

@@ -1,22 +1,40 @@
 pis:
   hosts:
-      numbah1:
-        hostname: numbah1
+      head:
+        hostname: head
         ansible_user: ubuntu
         ansible_host: 10.0.0.200
-      numbah2:
-        hostname: numbah2
+      worker_1:
+        hostname: worker_1
         ansible_user: ubuntu
         ansible_host: 10.0.0.201
-      numbah3:
+      worker_2:
+        hostname: worker_2
         ansible_user: ubuntu
         ansible_host: 10.0.0.202
-        hostname: numbah3
-      numbah4:
+      worker_3:
+        hostname: worker_3
         ansible_user: ubuntu
         ansible_host: 10.0.0.203
-        hostname: numbah4
-      numbah5:
+      worker_4:
+        hostname: worker_4
         ansible_user: ubuntu
         ansible_host: 10.0.0.204
-        hostname: numbah5
+      worker_5:
+        hostname: worker_5
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.205
+      worker_6:
+        hostname: worker_6
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.206
+
+  vars:
+    hostname: luke, i am your wifi
+    password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65323531363064353365373863633662383439316538323063666538333964346166653863343032
+          3766613837376464613630343432653966646133393032370a626662376261303565653963313030
+          62373535396333323864333235393966663331353336363161316262316532306239333539393732
+          3631303466303161360a666133306565303761353839393231626235393963326330303031646439
+          3431
