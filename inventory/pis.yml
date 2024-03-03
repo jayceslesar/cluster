@@ -30,7 +30,7 @@ pis:
         ansible_host: 10.0.0.206
 
   vars:
-    hostname: luke, i am your wifi
+    ssid: luke, i am your wifi
     password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           65323531363064353365373863633662383439316538323063666538333964346166653863343032

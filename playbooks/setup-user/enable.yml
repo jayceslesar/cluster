@@ -1,46 +1,53 @@
 - hosts: all
   connection: local
   tasks:
-    - name: remove "user-data" file
-      delegate_to: localhost
-      blockinfile:
-        path: /Volumes/system-boot/user-data
-        block: ""
+    - name: allow ssh
+      copy:
+        content: ""
+        dest: /Volumes/system-boot/ssh
 
-    - name: copy "user-data" file
-      delegate_to: localhost
+    - name: Remove "user-data" file
+      ignore_errors: yes
+      ansible.builtin.file:
+        path: /Volumes/system-boot/user-data
+        state: absent
+
+    - name: Remake "user-data" file
       blockinfile:
+        create: true
         path: /Volumes/system-boot/user-data
         block: |
           #cloud-config
-          # Set your hostname here, the manage_etc_hosts will update the hosts file entries as well
-          hostname: {{ ansible_host }}
+          hostname: {{ hostname }}
           manage_etc_hosts: true
+          timezone: America/New_York
 
-          write_files:
-          - path: /etc/cloud/cloud.cfg.d/99-custom-networking.cfg
-            permissions: '0644'
-            content: |
-              network: {config: disabled}
+    - name: Remove "network-config" file
+      ignore_errors: yes
+      ansible.builtin.file:
+        path: /Volumes/system-boot/network-config
+        state: absent
 
-          - path: /etc/netplan/my-new-config.yaml
-            permissions: '0644'
-            content: |
-              network:
-                version: 2
-                wifis:
-                  wlan0:
-                    access-points:
-                      "{{ hostname }}":
-                        password: "{{ password }}""
-                    dhcp4: no
-                    addresses:
-                      - "{{ ansible_host }}/24"
-                    gateway4: 10.0.0.1
-                    nameservers:
-                        addresses: [75.75.75.75]
-
-          runcmd:
-           - rm /etc/netplan/50-cloud-init.yaml
-           - netplan generate
-           - netplan apply
+    - name: remake "network-config"
+      blockinfile:
+        create: true
+        path: /Volumes/system-boot/network-config
+        block: |
+          network:
+            version: 2
+            ethernets:
+              eth0:
+                dhcp4: true
+                optional: true
+            wifis:
+              wlan0:
+                optional: true
+                access-points:
+                  "{{ ssid }}":
+                    password: "{{ password }}"
+                dhcp4: false
+                addresses:
+                  - {{ ansible_host }}/24
+                gateway4: 10.0.0.1
+                nameservers:
+                  addresses: [75.75.75.75]
