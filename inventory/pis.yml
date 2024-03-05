@@ -2,29 +2,29 @@ pis:
   hosts:
       worker1:
         hostname: worker1
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.201
       worker2:
         hostname: worker2
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.202
       worker3:
         hostname: worker3
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.203
       worker4:
         hostname: worker4
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.204
       worker5:
         hostname: worker5
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.205
       worker6:
         hostname: worker6
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.206
       worker7:
         hostname: worker7
-        ansible_user: ubuntu
+        ansible_user: worker
         ansible_host: 10.0.0.207
