@@ -1,40 +1,30 @@
 pis:
   hosts:
-      head:
-        hostname: head
-        ansible_user: ubuntu
-        ansible_host: 10.0.0.200
-      worker_1:
-        hostname: worker_1
+      worker1:
+        hostname: worker1
         ansible_user: ubuntu
         ansible_host: 10.0.0.201
-      worker_2:
-        hostname: worker_2
+      worker2:
+        hostname: worker2
         ansible_user: ubuntu
         ansible_host: 10.0.0.202
-      worker_3:
-        hostname: worker_3
+      worker3:
+        hostname: worker3
         ansible_user: ubuntu
         ansible_host: 10.0.0.203
-      worker_4:
-        hostname: worker_4
+      worker4:
+        hostname: worker4
         ansible_user: ubuntu
         ansible_host: 10.0.0.204
-      worker_5:
-        hostname: worker_5
+      worker5:
+        hostname: worker5
         ansible_user: ubuntu
         ansible_host: 10.0.0.205
-      worker_6:
-        hostname: worker_6
+      worker6:
+        hostname: worker6
         ansible_user: ubuntu
         ansible_host: 10.0.0.206
-
-  vars:
-    ssid: luke, i am your wifi
-    password: !vault |
-          $ANSIBLE_VAULT;1.1;AES256
-          65323531363064353365373863633662383439316538323063666538333964346166653863343032
-          3766613837376464613630343432653966646133393032370a626662376261303565653963313030
-          62373535396333323864333235393966663331353336363161316262316532306239333539393732
-          3631303466303161360a666133306565303761353839393231626235393963326330303031646439
-          3431
+      worker7:
+        hostname: worker7
+        ansible_user: ubuntu
+        ansible_host: 10.0.0.207

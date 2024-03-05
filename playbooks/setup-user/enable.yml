@@ -13,41 +13,50 @@
         state: absent
 
     - name: Remake "user-data" file
-      blockinfile:
-        create: true
-        path: /Volumes/system-boot/user-data
-        block: |
+      copy:
+        dest: /Volumes/system-boot/user-data
+        content: |
           #cloud-config
           hostname: {{ hostname }}
           manage_etc_hosts: true
-          timezone: America/New_York
+          packages:
+          - avahi-daemon
+          apt:
+            conf: |
+              Acquire {
+                Check-Date "false";
+              };
 
-    - name: Remove "network-config" file
+          users:
+          - name: worker
+            groups: users,adm,dialout,audio,netdev,video,plugdev,cdrom,games,input,gpio,spi,i2c,render,sudo
+            shell: /bin/bash
+            lock_passwd: false
+            passwd: $5$RZjH.xQeAE$4kBTav9zc7V4OpoF/Hg8ZdCEAH34O2Tofotn1S5WPQA
+
+          ssh_pwauth: true
+
+          timezone: America/New_York
+          runcmd:
+          - localectl set-x11-keymap "us" pc105
+          - setupcon -k --force || true
+
+    - name: Remove "network-config" filessh
       ignore_errors: yes
       ansible.builtin.file:
         path: /Volumes/system-boot/network-config
         state: absent
 
     - name: remake "network-config"
-      blockinfile:
-        create: true
-        path: /Volumes/system-boot/network-config
-        block: |
-          network:
-            version: 2
-            ethernets:
-              eth0:
-                dhcp4: true
-                optional: true
-            wifis:
-              wlan0:
-                optional: true
-                access-points:
-                  "{{ ssid }}":
-                    password: "{{ password }}"
-                dhcp4: false
-                addresses:
-                  - {{ ansible_host }}/24
-                gateway4: 10.0.0.1
-                nameservers:
-                  addresses: [75.75.75.75]
+      copy:
+        dest: /Volumes/system-boot/network-config
+        content: |
+          version: 2
+          ethernets:
+            eth0:
+              dhcp4: no
+              addresses:
+                - {{ ansible_host }}/24  # Replace with your desired static IP
+              gateway4: 10.0.0.1
+              nameservers:
+                addresses: [75.75.75.75, 75.75.75.76]
